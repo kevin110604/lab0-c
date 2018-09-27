@@ -140,7 +140,6 @@ bool q_remove_head(queue_t *q, char *sp, size_t bufsize)
     }
     free(q->head->value);
 
-
     /* need this when this is the last one */
     if (q->head->next == NULL)
         q->tail = NULL;
@@ -175,6 +174,8 @@ int q_size(queue_t *q)
 void q_reverse(queue_t *q)
 {
     /* You need to write the code for this function */
+    if (q == NULL || q->size <= 1)
+        return;
     list_ele_t *cur, *pre, *old_tail, *tmp;
     old_tail = q->tail;
     pre = NULL;
