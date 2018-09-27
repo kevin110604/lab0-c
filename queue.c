@@ -29,6 +29,7 @@ queue_t *q_new()
     if (q == NULL)
         return q;
     q->head = NULL;
+    q->tail = NULL;
     return q;
 }
 
@@ -44,10 +45,6 @@ void q_free(queue_t *q)
         tmp = q->head;
         q->head = q->head->next;
         free(tmp);
-        // tmp_next = q->head->next;
-        // free(q->head->value);
-        // free(q->head);
-        // q->head = tmp_next;
     }
     /* Free queue structure */
     free(q);
@@ -76,6 +73,9 @@ bool q_insert_head(queue_t *q, char *s)
         return false;
     }
     strcpy(newh->value, s);
+    /* need this when insert the first element */
+    if (q->head == NULL)
+        q->tail = newh;
     /* What if either call to malloc returns NULL? */
     newh->next = q->head;
     q->head = newh;
@@ -94,7 +94,28 @@ bool q_insert_tail(queue_t *q, char *s)
 {
     /* You need to write the complete code for this function */
     /* Remember: It should operate in O(1) time */
-    return false;
+    list_ele_t *newh;
+    if (q == NULL)
+        return false;
+    newh = malloc(sizeof(list_ele_t));
+    if (newh == NULL)
+        return false;
+    newh->value = malloc(strlen(s) + 1);
+    if (newh->value == NULL) {
+        free(newh);
+        return false;
+    }
+    strcpy(newh->value, s);
+    newh->next = NULL;
+    /* need this when insert the first element */
+    if (q->head == NULL) {
+        q->head = newh;
+        q->tail = newh;
+    } else {
+        q->tail->next = newh;
+        q->tail = newh;
+    }
+    return true;
 }
 
 /*
