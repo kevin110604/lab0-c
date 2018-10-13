@@ -164,10 +164,11 @@ bool do_insert_head(int argc, char *argv[])
     if (exception_setup(true)) {
         for (r = 0; ok && r < reps; r++) {
             bool rval = q_insert_head(q, inserts);
-            /*******/
-            list_ele_t *item = list_entry(q->head, list_ele_t, list);
-            /******/
+
             if (rval) {
+                /*******/
+                list_ele_t *item = list_entry(q->head, list_ele_t, list);
+                /******/
                 qcnt++;
                 if (!item->value) {
                     report(1, "ERROR: Failed to save copy of string in list");
@@ -228,10 +229,11 @@ bool do_insert_tail(int argc, char *argv[])
     if (exception_setup(true)) {
         for (r = 0; ok && r < reps; r++) {
             bool rval = q_insert_tail(q, inserts);
-            /*******/
-            list_ele_t *item = list_entry(q->head, list_ele_t, list);
-            /******/
+
             if (rval) {
+                /*******/
+                list_ele_t *item = list_entry(q->head, list_ele_t, list);
+                /******/
                 qcnt++;
                 if (!item->value) {
                     report(1, "ERROR: Failed to save copy of string in list");
