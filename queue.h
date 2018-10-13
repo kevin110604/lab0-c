@@ -12,27 +12,40 @@
  */
 
 #include <stdbool.h>
+#include <stddef.h> /* offsetof */
 
 /************** Data structure declarations ****************/
+
+/* Queue structure */
+typedef struct list_node {
+    struct list_node *head; /* Linked list of elements */
+    struct list_node *tail;
+} queue_t;
+
 
 /* Linked list element (You shouldn't need to change this) */
 typedef struct ELE {
     /* Pointer to array holding string.
        This array needs to be explicitly allocated and freed */
     char *value;
-    struct ELE *next;
+    queue_t list;
 } list_ele_t;
 
-/* Queue structure */
-typedef struct {
-    list_ele_t *head; /* Linked list of elements */
-    list_ele_t *tail;
-    int size;
-    /*
-      You will need to add more fields to this structure
-      to efficiently implement q_size and q_insert_tail
-    */
-} queue_t;
+#ifndef container_of
+#ifdef __LIST_HAVE_TYPEOF
+#define container_of(ptr, type, member)                            \
+    __extension__({                                                \
+        const __typeof__(((type *) 0)->member) *__pmember = (ptr); \
+        (type *) ((char *) __pmember - offsetof(type, member));    \
+    })
+#else
+#define container_of(ptr, type, member) \
+    ((type *) ((char *) (ptr) -offsetof(type, member)))
+#endif
+#endif
+
+
+#define list_entry(node, type, member) container_of(node, type, member)
 
 /************** Operations on queue ************************/
 
