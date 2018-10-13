@@ -20,14 +20,14 @@
 typedef struct list_node {
     struct list_node *head; /* Linked list of elements */
     struct list_node *tail;
+    int size;
 } queue_t;
 
 
 /* Linked list element (You shouldn't need to change this) */
+/* This array needs to be explicitly allocated and freed */
 typedef struct ELE {
-    /* Pointer to array holding string.
-       This array needs to be explicitly allocated and freed */
-    char *value;
+    char *value; /* Pointer to array holding string */
     queue_t list;
 } list_ele_t;
 
