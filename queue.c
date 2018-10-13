@@ -67,9 +67,10 @@ void q_free(queue_t *q)
 bool q_insert_head(queue_t *q, char *s)
 {
     /*
+    list_ele_t *newh;
     if (q == NULL)
         return false;
-    list_ele_t *newh = malloc(sizeof(list_ele_t));
+    newh = malloc(sizeof(list_ele_t));
     if (newh == NULL)
         return false;
     newh->value = malloc(strlen(s) + 1);
@@ -78,11 +79,14 @@ bool q_insert_head(queue_t *q, char *s)
         return false;
     }
     strcpy(newh->value, s);
+
     queue_t *next = q->head;
-    next->tail = &newh->list;
-    newh->list.head = next;
-    newh->list.tail = q;
-    q->head = &newh->list;
+    queue_t *node = &newh->list;
+
+    next->tail = node;
+    node->head = next;
+    node->tail = q;
+    q->head = node;
     */
     return true;
 }
@@ -97,9 +101,29 @@ bool q_insert_head(queue_t *q, char *s)
  */
 bool q_insert_tail(queue_t *q, char *s)
 {
-    /* You need to write the complete code for this function */
-    /* Remember: It should operate in O(1) time */
-    return 0;
+    /*
+    list_ele_t *newh;
+    if (q == NULL)
+        return false;
+    newh = malloc(sizeof(list_ele_t));
+    if (newh == NULL)
+        return false;
+    newh->value = malloc(strlen(s) + 1);
+    if (newh->value == NULL) {
+        free(newh);
+        return false;
+    }
+    strcpy(newh->value, s);
+
+    queue_t *prev = q->tail;
+    queue_t *node = &newh->list;
+
+    prev->head = node;
+    node->head = q;
+    node->tail = prev;
+    q->tail = node;
+    */
+    return true;
 }
 
 /*
