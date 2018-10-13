@@ -35,7 +35,6 @@ queue_t *q_new()
 /* Free all storage used by queue */
 void q_free(queue_t *q)
 {
-    /*
     if (q == NULL)
         return;
 
@@ -56,7 +55,6 @@ void q_free(queue_t *q)
         free(item);
     }
     free(q);
-    */
 }
 
 /*
