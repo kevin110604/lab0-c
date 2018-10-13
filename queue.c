@@ -33,7 +33,31 @@ queue_t *q_new()
 }
 
 /* Free all storage used by queue */
-void q_free(queue_t *q) {}
+void q_free(queue_t *q)
+{
+    /*
+    if (q == NULL)
+        return;
+
+    queue_t *node;
+    queue_t *next;
+    queue_t *prev;
+    list_ele_t *item;
+
+    while (q->head != q) {
+        node = q->head;
+        item = list_entry(node, list_ele_t, list);
+        free(item->value);
+
+        next = node->head;
+        prev = node->tail;
+        next->tail = prev;
+        prev->head = next;
+        free(item);
+    }
+    free(q);
+    */
+}
 
 /*
   Attempt to insert element at head of queue.
@@ -44,7 +68,25 @@ void q_free(queue_t *q) {}
  */
 bool q_insert_head(queue_t *q, char *s)
 {
-    return 0;
+    /*
+    if (q == NULL)
+        return false;
+    list_ele_t *newh = malloc(sizeof(list_ele_t));
+    if (newh == NULL)
+        return false;
+    newh->value = malloc(strlen(s) + 1);
+    if (newh->value == NULL) {
+        free(newh);
+        return false;
+    }
+    strcpy(newh->value, s);
+    queue_t *next = q->head;
+    next->tail = &newh->list;
+    newh->list.head = next;
+    newh->list.tail = q;
+    q->head = &newh->list;
+    */
+    return true;
 }
 
 
@@ -72,7 +114,25 @@ bool q_insert_tail(queue_t *q, char *s)
 */
 bool q_remove_head(queue_t *q, char *sp, size_t bufsize)
 {
-    return 0;
+    if (q == NULL || q->head == q)
+        return false;
+    queue_t *node = q->head;
+    list_ele_t *item = list_entry(node, list_ele_t, list);
+    if (sp != NULL) {
+        strncpy(sp, item->value, bufsize - 1);
+        sp[bufsize - 1] = '\0';
+    }
+    free(item->value);
+
+
+    queue_t *next = node->head;
+    queue_t *prev = node->tail;
+
+    next->tail = prev;
+    prev->head = next;
+    free(item);
+
+    return true;
 }
 
 /*
