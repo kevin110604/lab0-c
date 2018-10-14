@@ -59,6 +59,17 @@ static inline void list_add(queue_t *node, queue_t *head)
 }
 
 
+static inline void list_add_tail(queue_t *node, queue_t *head)
+{
+    queue_t *prev = head->tail;
+
+    prev->head = node;
+    node->head = head;
+    node->tail = prev;
+    head->tail = node;
+}
+
+
 #define list_entry(node, type, member) container_of(node, type, member)
 
 /************** Operations on queue ************************/

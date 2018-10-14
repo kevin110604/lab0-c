@@ -89,8 +89,9 @@ bool q_insert_head(queue_t *q, char *s)
      node->head = next;
      node->tail = q;
      q->head = node;
-     q->size++;
     */
+    q->size++;
+
     return true;
 }
 
@@ -104,7 +105,6 @@ bool q_insert_head(queue_t *q, char *s)
  */
 bool q_insert_tail(queue_t *q, char *s)
 {
-    /*
     list_ele_t *newh;
     if (q == NULL)
         return false;
@@ -118,6 +118,8 @@ bool q_insert_tail(queue_t *q, char *s)
     }
     strcpy(newh->value, s);
 
+    list_add_tail(&newh->list, q);
+    /*
     queue_t *prev = q->tail;
     queue_t *node = &newh->list;
 
@@ -125,8 +127,9 @@ bool q_insert_tail(queue_t *q, char *s)
     node->head = q;
     node->tail = prev;
     q->tail = node;
-    q->size++;
     */
+    q->size++;
+
     return true;
 }
 
