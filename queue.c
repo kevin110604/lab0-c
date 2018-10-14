@@ -74,22 +74,22 @@ bool q_insert_head(queue_t *q, char *s)
     newh = malloc(sizeof(list_ele_t));
     if (newh == NULL)
         return false;
-    newh->value = malloc(strlen(s) + 1);
-    if (newh->value == NULL) {
-        free(newh);
-        return false;
-    }
-    strcpy(newh->value, s);
+     newh->value = malloc(strlen(s) + 1);
+     if (newh->value == NULL) {
+         free(newh);
+         return false;
+     }
+     strcpy(newh->value, s);
 
-    queue_t *next = q->head;
-    queue_t *node = &newh->list;
+     queue_t *next = q->head;
+     queue_t *node = &newh->list;
 
-    next->tail = node;
-    node->head = next;
-    node->tail = q;
-    q->head = node;
-    q->size++;
-    */
+     next->tail = node;
+     node->head = next;
+     node->tail = q;
+     q->head = node;
+     q->size++;
+     */
     return true;
 }
 

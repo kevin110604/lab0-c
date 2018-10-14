@@ -31,6 +31,9 @@ typedef struct ELE {
     queue_t list;
 } list_ele_t;
 
+
+/************* Linux style list operation ****************/
+
 #ifndef container_of
 #ifdef __LIST_HAVE_TYPEOF
 #define container_of(ptr, type, member)                            \
@@ -43,6 +46,17 @@ typedef struct ELE {
     ((type *) ((char *) (ptr) -offsetof(type, member)))
 #endif
 #endif
+
+
+static inline void list_add(queue_t *node, queue_t *head)
+{
+    queue_t *next = head->head;
+
+    next->tail = node;
+    node->head = next;
+    node->tail = head;
+    head->head = node;
+}
 
 
 #define list_entry(node, type, member) container_of(node, type, member)
