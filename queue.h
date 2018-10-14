@@ -70,6 +70,16 @@ static inline void list_add_tail(queue_t *node, queue_t *head)
 }
 
 
+static inline void list_del(queue_t *node)
+{
+    queue_t *next = node->head;
+    queue_t *prev = node->tail;
+
+    next->tail = prev;
+    prev->head = next;
+}
+
+
 #define list_entry(node, type, member) container_of(node, type, member)
 
 

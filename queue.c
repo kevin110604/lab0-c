@@ -38,21 +38,14 @@ void q_free(queue_t *q)
 {
     if (q == NULL)
         return;
-
     queue_t *node;
-    queue_t *next;
-    queue_t *prev;
     list_ele_t *item;
 
     while (q->head != q) {
         node = q->head;
         item = list_entry(node, list_ele_t, list);
         free(item->value);
-
-        next = node->head;
-        prev = node->tail;
-        next->tail = prev;
-        prev->head = next;
+        list_del(node);
         free(item);
     }
     free(q);
