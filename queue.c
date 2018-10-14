@@ -27,8 +27,7 @@ queue_t *q_new()
     queue_t *q = malloc(sizeof(queue_t));
     if (q == NULL)
         return q;
-    q->head = q;
-    q->tail = q;
+    INIT_LIST_HEAD(q);
     q->size = 0;
     return q;
 }

@@ -48,6 +48,13 @@ typedef struct ELE {
 #endif
 
 
+static inline void INIT_LIST_HEAD(queue_t *head)
+{
+    head->head = head;
+    head->tail = head;
+}
+
+
 static inline void list_add(queue_t *node, queue_t *head)
 {
     queue_t *next = head->head;
