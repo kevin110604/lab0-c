@@ -72,6 +72,12 @@ static inline void list_add_tail(queue_t *node, queue_t *head)
 
 #define list_entry(node, type, member) container_of(node, type, member)
 
+
+#define list_for_each_safe(node, safe, list_head)                          \
+    for (node = (list_head)->head, safe = node->head; node != (list_head); \
+         node = safe, safe = node->head)
+
+
 /************** Operations on queue ************************/
 
 /*

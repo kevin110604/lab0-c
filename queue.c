@@ -190,8 +190,11 @@ void q_reverse(queue_t *q)
     old_tail = q->tail;
     pre = q;
     q->tail = q->head;
-    for (cur = q->head; cur != old_tail; cur = tmp) {
-        tmp = cur->head;
+
+    list_for_each_safe(cur, tmp, q)
+    {
+        if (cur == old_tail)
+            break;
         cur->head = pre;
         cur->tail = old_tail;
         pre->tail = cur;
