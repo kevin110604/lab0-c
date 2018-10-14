@@ -145,15 +145,9 @@ bool q_remove_head(queue_t *q, char *sp, size_t bufsize)
         sp[bufsize - 1] = '\0';
     }
     free(item->value);
-
-    queue_t *next = node->head;
-    queue_t *prev = node->tail;
-
-    next->tail = prev;
-    prev->head = next;
+    list_del(node);
     free(item);
     q->size--;
-
     return true;
 }
 
